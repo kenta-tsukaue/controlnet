@@ -310,10 +310,11 @@ class ControlLDM(LatentDiffusion):
     def __init__(self, control_stage_config, control_key, only_mid_control, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.control_model = instantiate_from_config(control_stage_config)
+        print("Control_model", self.control_model)
+        print("Diffusion_model", self.model.diffusion_model)
         self.control_key = control_key
         self.only_mid_control = only_mid_control
         self.control_scales = [1.0] * 13
-
     @torch.no_grad()
     def get_input(self, batch, k, bs=None, *args, **kwargs):
         x, c = super().get_input(batch, self.first_stage_key, *args, **kwargs)
