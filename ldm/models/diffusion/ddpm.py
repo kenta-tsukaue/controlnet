@@ -213,6 +213,7 @@ class DDPM(pl.LightningModule):
             sd = sd["state_dict"]
         keys = list(sd.keys())
         for k in keys:
+            print
             for ik in ignore_keys:
                 if k.startswith(ik):
                     print("Deleting key {} from state_dict.".format(k))
