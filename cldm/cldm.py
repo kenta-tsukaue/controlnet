@@ -329,7 +329,7 @@ class ControlLDM(LatentDiffusion):
     def apply_model(self, x_noisy, t, cond, *args, **kwargs):
         print("===================ここだあ！！！！====================")
         print(x_noisy.size())
-        print(cond)
+        #print(cond)
         assert isinstance(cond, dict)
         diffusion_model = self.model.diffusion_model
 
@@ -340,6 +340,8 @@ class ControlLDM(LatentDiffusion):
         else:
             control = self.control_model(x=x_noisy, hint=torch.cat(cond['c_concat'], 1), timesteps=t, context=cond_txt)
             control = [c * scale for c, scale in zip(control, self.control_scales)]
+            print("=======control=========")
+            print(control[0])
             eps = diffusion_model(x=x_noisy, timesteps=t, context=cond_txt, control=control, only_mid_control=self.only_mid_control)
 
         return eps
