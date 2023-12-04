@@ -328,8 +328,8 @@ class ControlLDM(LatentDiffusion):
 
     def apply_model(self, x_noisy, t, cond, *args, **kwargs):
         print("===================ここだあ！！！！====================")
-        print(x_noisy.size(), t.size(), cond.size())
-        print(cond[0])
+        print(x_noisy.size())
+        print(cond)
         assert isinstance(cond, dict)
         diffusion_model = self.model.diffusion_model
 
