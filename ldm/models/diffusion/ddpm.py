@@ -381,10 +381,10 @@ class DDPM(pl.LightningModule):
         return loss
 
     def p_losses(self, x_start, t, noise=None):
+        "===================loss===================="
         noise = default(noise, lambda: torch.randn_like(x_start))
         x_noisy = self.q_sample(x_start=x_start, t=t, noise=noise)
         model_out = self.model(x_noisy, t)
-
         loss_dict = {}
         if self.parameterization == "eps":
             target = noise
